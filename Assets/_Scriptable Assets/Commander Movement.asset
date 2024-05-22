@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2c3744d1f12434b893aaef14bd02db, type: 3}
   m_Name: Commander Movement
   m_EditorClassIdentifier: 
-  maxSpeed: 6
-  acceleration: 1.25
-  decceleration: 0.5
+  maxSpeed: 8
+  acceleration: 0.6
+  decceleration: 0.3

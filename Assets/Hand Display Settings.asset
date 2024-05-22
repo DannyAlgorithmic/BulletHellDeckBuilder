@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23a69621becc1545adf6f99f8f5e0c4, type: 3}
+  m_Name: Hand Display Settings
+  m_EditorClassIdentifier: 
+  SpawnDelay: 0.2
+  DragSpeed: 1.2
+  RepositionSpeed: 2.6
+  VisualsRotationSpeed: 10
+  RotationSpeed: 1
+  SplineOffset: 0
+  FocusedElevation: -9
+  NormalScale: 2
+  FocusedScale: 3
+  ScaleSpeed: 1.9
+  CardDepth: 0.1
+  MaxHandSeparation: 1.55
+  MaxSpreadOffset: 1.35
+  MaximumTilt: 0
+  SpreadCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.036132812
+      value: 1.0087738
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.52926636
+      value: 0.014038086
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
