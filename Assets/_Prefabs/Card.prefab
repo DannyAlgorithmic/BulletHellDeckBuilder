@@ -387,6 +387,7 @@ MonoBehaviour:
   sortingGroup: {fileID: 8505168983641935450}
   parallaxGroup: {fileID: 8708106863045786700}
   shake: {fileID: 6820904993611783446}
+  shipPrefab: {fileID: 7428622252327689904, guid: 4a24322343b9b9c449e6a2ae9b8599b6, type: 3}
 --- !u!114 &3198794626315294345
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 public class HandInteractionManager : MonoBehaviour
 {
     [SerializeField] float detectionSize = 0.25f;
-    [SerializeField] LayerMask spawnArea, cardLayers;
+    [SerializeField] LayerMask cardLayer, spawnArea, spawnBlocking;
     [SerializeField] ActionHand actionDisplay = null;
 
     // [SerializeField] ControlProxy controlProxy = null;
@@ -32,6 +32,10 @@ public class HandInteractionManager : MonoBehaviour
     }
     void PlayAndReset(Card _card)
     {
+        Instantiate(_card.shipPrefab, mouseData.worldPosition, Quaternion.identity);
+        player.hand.Remove(_card);
+        _card.GO.SetActive(false);
+
         actionDisplay.ClearFocus();
         actionDisplay.HandReset();
     }
@@ -83,17 +87,20 @@ public class HandInteractionManager : MonoBehaviour
     }
     public void ActionCardUsage()
     {
-        if (   Input.GetMouseButtonUp(1) // controlProxy.Current.BattleMap.Selection.WasReleasedThisFrame()
-            &&  currentCard != null
-            && !Physics2D.OverlapCircle(mouseData.worldPosition, detectionSize, 1 << LayerMask.NameToLayer("Card"))
+        if (   Input.GetMouseButtonUp(0) // controlProxy.Current.BattleMap.Selection.WasReleasedThisFrame()
+            && currentCard != null
+            && !Physics2D.OverlapCircle(mouseData.worldPosition, detectionSize, spawnBlocking.value)
             && Physics2D.OverlapCircle(mouseData.worldPosition, detectionSize, spawnArea.value))
-        { PlayAndReset(currentCard); }
+        {
+            // Debug.Log($"card {currentCard.index} Dropped", currentCard.GO);
+            PlayAndReset(currentCard);
+        }
     }
 
     private Card DetectCard()
     {
         Vector3 origin      = new Vector3(mouseData.worldPosition.x, mouseData.worldPosition.y, Camera.main.transform.position.z);
-        int rayHitCount     = Physics2D.RaycastNonAlloc(origin, Vector3.forward, rayHits, Mathf.Abs(Camera.main.transform.position.z), cardLayers.value);
+        int rayHitCount     = Physics2D.RaycastNonAlloc(origin, Vector3.forward, rayHits, Mathf.Abs(Camera.main.transform.position.z), cardLayer.value);
         return rayHitCount  > 0 ? rayHits[0].collider.GetComponent<Card>() : null;
     }
 }

@@ -36,8 +36,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - spawn area
+  - spawn blocker
   m_SortingLayers:
   - name: Default
     uniqueID: 0

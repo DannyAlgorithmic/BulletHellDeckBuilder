@@ -22,4 +22,7 @@ public class Card : MonoBehaviour
     public SortingGroup sortingGroup = null;
     public ParallaxGroup parallaxGroup = null;
     public SavageShake shake = null;
+
+    // placeholder
+    public GameObject shipPrefab = null;
 }
