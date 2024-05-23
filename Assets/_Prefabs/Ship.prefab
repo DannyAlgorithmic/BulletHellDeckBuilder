@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c0276417ddf3c3b4b9b6057e40d2dab8, type: 3}
-  m_Color: {r: 0.5213876, g: 1, b: 0.3820755, a: 0.29803923}
+  m_Color: {r: 1, g: 0.39193618, b: 0.3803922, a: 0.14901961}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -195,7 +195,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c0276417ddf3c3b4b9b6057e40d2dab8, type: 3}
-  m_Color: {r: 0.5213876, g: 1, b: 0.3820755, a: 0.29803923}
+  m_Color: {r: 0.5213876, g: 1, b: 0.3820755, a: 0.019607844}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -292,6 +292,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a1dee57d4cc894a88c2bf9c6de6d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  healthMax: 100
+  energy: 50
+  energyMax: 50
   moveIntent: {fileID: 1657147281643681399}
   movement: {fileID: 2139095007008213363}
   movementProfile: {fileID: 11400000, guid: 2b0e2daf2e05df54785881a403a3f2a2, type: 2}
@@ -299,6 +303,7 @@ MonoBehaviour:
   rotation: {fileID: 7780443729439010436}
   rotationProfile: {fileID: 11400000, guid: 3ff8e7834ac19344a86a19e83457074f, type: 2}
   body: {fileID: 3906739255212763768}
+  debugDrain: 1
 --- !u!114 &1657147281643681399
 MonoBehaviour:
   m_ObjectHideFlags: 0

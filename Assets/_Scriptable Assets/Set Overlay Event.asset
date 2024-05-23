@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb428067de5ae1640849ea148c60a63a, type: 3}
-  m_Name: Mouse Data
+  m_Script: {fileID: 11500000, guid: fe396bf892d55f5498d7f55d09568bab, type: 3}
+  m_Name: Set Overlay Event
   m_EditorClassIdentifier: 
-  screenPosition: {x: 0, y: 0}
-  worldPosition: {x: 0, y: 0}
-  previousScreenPosition: {x: 1, y: 1}
-  previousWorldPosition: {x: 1, y: 1}
