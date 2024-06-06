@@ -5,27 +5,34 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    [SerializeField]
-    private float health, healthMax, energy, energyMax;
+    public FactionEnum faction = FactionEnum.None;
+    public float health, healthMax, energy, energyMax;
+    public float flightSpeed, flightCost;
+    public float regenCost, repairCost;
+    public float shotSpeed, shotSpread, reloadSpeed, reloadCooldown;
+
+
 
 
 
     [Header("Movement")]
-    public MoveIntent moveIntent;
     public Movement movement = null;
+    public MoveIntent moveIntent = null;
     public MovementProfile movementProfile = null;
-    private bool movementAvailable = false;
 
     [Header("Rotation")]
-    public RotationIntent rotationIntent;
     public Rotation rotation = null;
+    public RotationIntent rotationIntent = null;
     public RotationProfile rotationProfile = null;
-    private bool rotationAvailable = false;
 
     [Header("Body and Colliders")]
     public Rigidbody2D body = null;
 
-    public bool debugDrain = false;
+    [Header("Event")]
+    public SetOverlayEvent overlayEvent = null;
+    public Card card = null;
+
+    public bool mainShip = false, overlayTarget = false, debugDrain = false;
 
     public float Health
     {
@@ -65,60 +72,41 @@ public class Ship : MonoBehaviour
         }
     }
 
-    Action<float> healthListeners = null, healthMaxListeners = null, energyListeners = null, energyMaxListeners = null;
-
-    public void HealthTrigger(Ship _ship) => healthListeners?.Invoke(health);
-    public void HealthRegister(Action<float> _listener) => healthListeners += _listener;
-    public void HealthUnregister(Action<float> _listener) => healthListeners -= _listener;
-
-    public void EnergyTrigger(Ship _ship) => energyListeners?.Invoke(energy);
-    public void EnergyRegister(Action<float> _listener) => energyListeners += _listener;
-    public void EnergyUnregister(Action<float> _listener) => energyListeners -= _listener;
-
-    public void HealthMaxTrigger(Ship _ship) => healthMaxListeners?.Invoke(healthMax);
-    public void HealthMaxRegister(Action<float> _listener) => healthMaxListeners += _listener;
-    public void HealthMaxUnregister(Action<float> _listener) => healthMaxListeners -= _listener;
-
-    public void EnergyMaxTrigger(Ship _ship) => energyMaxListeners?.Invoke(energyMax);
-    public void EnergyMaxRegister(Action<float> _listener) => energyMaxListeners += _listener;
-    public void EnergyMaxUnregister(Action<float> _listener) => energyMaxListeners -= _listener;
-
+    public Action<float> healthListeners = null, healthMaxListeners = null, energyListeners = null, energyMaxListeners = null;
 
     private void OnEnable()
     {
-        if (!rotationAvailable) rotationAvailable = TryGetComponent(out rotation);
-        if (!movementAvailable) movementAvailable = TryGetComponent(out movement);
+        TryGetComponent(out rotation);
+        TryGetComponent(out movement);
     }
 
     private void Start()
     {
-        if (rotationAvailable) rotationProfile.SetProfile(rotation);
-        if (movementAvailable) movementProfile.SetProfile(movement);
+        rotationProfile.SetProfile(rotation);
+        movementProfile.SetProfile(movement);
+        if (overlayTarget) overlayEvent?.Trigger(this);
     }
 
     private void FixedUpdate()
     {
         float deltaTimeFixed = Time.fixedDeltaTime;
-
-        if (rotationAvailable && !Input.GetKey(KeyCode.LeftControl))
-            rotation.Rotate(body, rotationIntent.rotation, deltaTimeFixed);
-        if (movementAvailable)
-            movement.Move(body, moveIntent.direction);
+        if (!Input.GetKey(KeyCode.LeftControl)) rotation.Rotate(body, rotationIntent.rotation, deltaTimeFixed);
+        movement.Move(body, moveIntent.direction);
     }
     private void Update()
     {
         float deltaTime = Time.deltaTime;
 
-        rotationIntent.rotation = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - body.position;
-        moveIntent.direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        // rotationIntent.rotation = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - body.position;
+        // moveIntent.direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (rotationAvailable) rotation.Cooldown(deltaTime);
-        if (movementAvailable) movement.Cooldown(deltaTime);
+        rotation.Cooldown(deltaTime);
+        movement.Cooldown(deltaTime);
+    }
 
-        if (debugDrain)
-        {
-            Health = Mathf.Max(health - Time.deltaTime, 0f);
-            Energy = Mathf.Max(energy - Time.deltaTime, 0f);
-        }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(!mainShip || !collision.gameObject.CompareTag("Ship")) return;
+        // card
     }
 }

@@ -13,11 +13,7 @@ public class ShipOverlay : MonoBehaviour
 
     void Awake()
     {
-        if (cachedShip != null) OverlapResponse(cachedShip);
-    }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) OverlapResponse(cachedShip);
+        overlayEvent.Register(OverlapResponse);
     }
 
     public void OverlapResponse(Ship _ship)
@@ -30,20 +26,22 @@ public class ShipOverlay : MonoBehaviour
         energyBar.maxValue = _ship.EnergyMax;
         energyBar.value     = _ship.Energy;
 
-        _ship.HealthRegister(HealthRefresh);
-        _ship.HealthMaxRegister(HealthMaxRefresh);
+        _ship.healthListeners += HealthRefresh;
+        _ship.healthMaxListeners += HealthMaxRefresh;
 
-        _ship.EnergyRegister(EnergyRefresh);
-        _ship.EnergyMaxRegister(EnergyMaxRefresh);
+        _ship.energyListeners += EnergyRefresh;
+        _ship.energyMaxListeners += EnergyMaxRefresh;
     }
 
     void OnDestroy()
     {
-        cachedShip.HealthUnregister(HealthRefresh);
-        cachedShip.HealthMaxUnregister(HealthMaxRefresh);
+        cachedShip.healthListeners -= HealthRefresh;
+        cachedShip.healthMaxListeners -= HealthMaxRefresh;
 
-        cachedShip.EnergyUnregister(EnergyRefresh);
-        cachedShip.EnergyMaxUnregister(EnergyMaxRefresh);
+        cachedShip.energyListeners -= EnergyRefresh;
+        cachedShip.energyMaxListeners -= EnergyMaxRefresh;
+
+        overlayEvent.Unregister(OverlapResponse);
     }
 
     public void HealthRefresh(float _value) => healthBar.value = _value;

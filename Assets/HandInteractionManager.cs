@@ -14,9 +14,7 @@ public class HandInteractionManager : MonoBehaviour
     // [SerializeField] MatchData battleData = null;
     public Combatant player = null;
 
-    [Header("Debug")] public Card previousCard = null;
-    [Header("Debug")] public Card currentCard = null;
-
+    private Card previousCard = null, currentCard = null;
 
     RaycastHit2D[] rayHits = new RaycastHit2D[1];
 
@@ -87,7 +85,7 @@ public class HandInteractionManager : MonoBehaviour
     }
     public void ActionCardUsage()
     {
-        if (   Input.GetMouseButtonUp(0) // controlProxy.Current.BattleMap.Selection.WasReleasedThisFrame()
+        if (   Input.GetMouseButtonUp(0)
             && currentCard != null
             && !Physics2D.OverlapCircle(mouseData.worldPosition, detectionSize, spawnBlocking.value)
             && Physics2D.OverlapCircle(mouseData.worldPosition, detectionSize, spawnArea.value))

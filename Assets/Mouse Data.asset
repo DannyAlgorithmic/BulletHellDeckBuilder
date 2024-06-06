@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb428067de5ae1640849ea148c60a63a, type: 3}
   m_Name: Mouse Data
   m_EditorClassIdentifier: 
-  screenPosition: {x: 0, y: 0}
-  worldPosition: {x: 0, y: 0}
-  previousScreenPosition: {x: 1, y: 1}
-  previousWorldPosition: {x: 1, y: 1}
+  screenPosition: {x: -270, y: 1263}
+  worldPosition: {x: -31.88889, y: 18.74444}
+  previousScreenPosition: {x: 846, y: 721}
+  previousWorldPosition: {x: -2.955555, y: 4.692592}

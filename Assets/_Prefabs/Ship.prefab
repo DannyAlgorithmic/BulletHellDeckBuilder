@@ -255,6 +255,9 @@ GameObject:
   - component: {fileID: 4426888696281415044}
   - component: {fileID: 7780443729439010436}
   - component: {fileID: 3906739255212763768}
+  - component: {fileID: 43460336179016403}
+  - component: {fileID: -568362073349189692}
+  - component: {fileID: 6696089711768331266}
   m_Layer: 6
   m_Name: Ship
   m_TagString: Untagged
@@ -292,17 +295,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a1dee57d4cc894a88c2bf9c6de6d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  faction: 0
   health: 100
   healthMax: 100
   energy: 50
   energyMax: 50
-  moveIntent: {fileID: 1657147281643681399}
+  flightSpeed: 0
+  flightCost: 0
+  regenCost: 0
+  repairCost: 0
+  shotSpeed: 0
+  shotSpread: 0
+  reloadSpeed: 0
+  reloadCooldown: 0
   movement: {fileID: 2139095007008213363}
+  moveIntent: {fileID: 1657147281643681399}
   movementProfile: {fileID: 11400000, guid: 2b0e2daf2e05df54785881a403a3f2a2, type: 2}
-  rotationIntent: {fileID: 4426888696281415044}
   rotation: {fileID: 7780443729439010436}
+  rotationIntent: {fileID: 4426888696281415044}
   rotationProfile: {fileID: 11400000, guid: 3ff8e7834ac19344a86a19e83457074f, type: 2}
   body: {fileID: 3906739255212763768}
+  overlayEvent: {fileID: 11400000, guid: f6acdc88bb566fa43a1a12ffd8bda14b, type: 2}
+  card: {fileID: 5226663282045188640, guid: a3f44bc682e612a42a6185df5bb388c9, type: 3}
+  mainShip: 0
+  overlayTarget: 0
   debugDrain: 1
 --- !u!114 &1657147281643681399
 MonoBehaviour:
@@ -377,7 +393,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 10
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -390,6 +406,94 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!58 &43460336179016403
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428622252327689904}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &-568362073349189692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428622252327689904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b5ecf6d5f672441b64d2ba0c7c1e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrustAimThreshold: 0.6
+  moveIntent: {fileID: 1657147281643681399}
+  rotationIntent: {fileID: 4426888696281415044}
+  targetTag: 
+  targets: []
+  trans: {fileID: 2611657791325461841}
+--- !u!58 &6696089711768331266
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428622252327689904}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 8
 --- !u!1001 &4283883858298735505
 PrefabInstance:
   m_ObjectHideFlags: 0
